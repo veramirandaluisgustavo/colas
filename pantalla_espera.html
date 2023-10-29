@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <title>Pantalla de Espera</title>
+    <style>
+
+        body {
+            background-color: #bce3fe;
+        }
+
+        .left-section {
+            background-color: #007bff;
+            color: white;
+            padding: 20px;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center; /* Añade esta línea para alinear el texto al centro */
+        }
+
+        .message {
+            animation: slide-left 5s infinite linear;
+        }
+
+        @keyframes slide-left {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6 left-section">
+                <h2>Aviso de turno</h2>
+                <div class="message">
+                    <h3>Número: 123</h3>
+                    <p>Consultorio: 1</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h2>Cola de espera:</h2>
+                <div class="alert alert-secondary">
+                    <h3>Número: 122</h3>
+                    <p>Consultorio: 2</p>
+                </div>
+                <div class="alert alert-secondary">
+                    <h3>Número: 121</h3>
+                    <p>Consultorio: 3</p>
+                </div>
+                <div class="alert alert-secondary">
+                    <h3>Número: 120</h3>
+                    <p>Consultorio: 4</p>
+                </div>
+                <div class="alert alert-secondary">
+                    <h3>Número: 119</h3>
+                    <p>Consultorio: 5</p>
+                </div>
+                <div class="alert alert-secondary">
+                    <h3>Número: 118</h3>
+                    <p>Consultorio: 6</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script th:inline="javascript">
+    let socket = new WebSocket("ws://localhost:8080/chat")
+
+    socket.onmessage =function(event){
+        let messageArea = document.getElementById("messageArea");
+        messageArea.innerHTML +="<p>" +event.data+"</p>";
+    };
+    
+    socket.send("pantalla");
+</script>
+</html>
