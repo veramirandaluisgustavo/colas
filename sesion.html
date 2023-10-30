@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+        </script>
+    <title>Sesión</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h2>Perfil del Médico</h2>
+                <div id="nombre" class="mb-3 fs-3"></div>
+                <div id="consultorio" class="mb-3 fs-3"></div>
+                <div id="especialidad" class="mb-3 fs-3"></div>
+                <button class="btn btn-primary btn-neon" onclick="location.href='inicio_medico.html'">Volver</button>
+                <button class="btn btn-primary btn-neon" onclick="sendMessage()">Siguiente Paciente</button>
+            </div>
+            <div class="col-md-6">
+                <h2>Ticket Actual</h2>
+                <div id="ticketActual">N/A</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        let urlParams = new URLSearchParams(window.location.search);
+        let nombre1 = urlParams.get("nombre");
+        let consultorio1 = urlParams.get("consultorio");
+        especialidad1 = urlParams.get("especialidad");
+        if (especialidad1.length == 0) {
+            especialidad1 = "nulo";
+        }
+
+
+
+
+        let perfil = "medico-"+`nombre:${nombre1}-consultorio:${consultorio1}-especialidad:${especialidad1}`;
+        console.log(perfil);
+        let socket = new WebSocket("ws://localhost:8080/chat");
+        setTimeout(function () {
+            console.log("Han pasado 2 segundos");
+            socket.send(perfil);
+        }, 2000);
+
+        socket.onmessage = function (event) {
+            let messageArea = document.getElementById("ticketActual");
+            if(event.data=="NO HAY MAS PACIENTES"){
+            messageArea.innerHTML ="<p>" +event.data+"</p>";
+        }
+        else{
+            data=event.data.split("-");
+            nombre=data[1].split(":")[1];
+            ci=data[2].split(":")[1];
+            messageArea.innerHTML ="<div><label>NOMBRE: " +nombre+"</label></div>";
+            messageArea.innerHTML +="<div><label>CI : " +ci+"</label></div>";
+
+        }
+        };
+        function sendMessage() {
+
+            socket.send("siguiente");
+            
+        }
+
+        // const partes = perfil.split('-');
+        // const nombre = partes.find(parte => parte.startsWith('Nombre:')).split('Nombre:')[1];
+        // const consultorio = partes.find(parte => parte.startsWith('Consultorio:')).split('Consultorio:')[1];
+        // const especialidad = partes.find(parte => parte.startsWith('Especialidad:')).split('Especialidad:')[1];
+
+        // document.getElementById("nombre").textContent = `Nombre: ${nombre}`;
+        // document.getElementById("consultorio").textContent = `Consultorio: ${consultorio}`;
+        // document.getElementById("especialidad").textContent = `Especialidad: ${especialidad}`;
+
+        // let ticketActual = 0;
+        // function llamarSiguientePaciente() {
+        //     ticketActual++;
+        //     document.getElementById("ticketActual").textContent = `Ticket Actual: ${ticketActual}`;
+        //}
+    </script>
+
+    <style>
+        body {
+            background-color: #bce3fe;
+        }
+
+        .btn-neon {
+            color: #131111;
+            font-size: 24px;
+            text-decoration: none;
+            transition: 0.2s;
+            padding: 15px 30px;
+            background: linear-gradient(10deg, transparent, #131939);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .btn-neon:hover {
+            background: #131939;
+            box-shadow: 0 0 10px #131939, 0 0 40px #131939, 0 0 40px #131939;
+            transition-delay: 0.1s;
+        }
+    </style>
+</body>
+
+</html>
