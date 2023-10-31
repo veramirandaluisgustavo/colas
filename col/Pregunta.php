@@ -9,6 +9,16 @@
     <title>Control</title>
 </head>
 <body>
+  <?php
+  $especialidad=$_GET["especialidad"];
+  if($especialidad=="general"){
+    $especialidad="nulo";
+  }
+  echo '<script>
+  let especialidad="'.$especialidad.'"
+  </script>'
+
+  ?>
    <div class="container text-center center-container">
 
       <br>
@@ -16,15 +26,22 @@
       <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="especialidad">
-                <a id="siButton" class="btn-neon" href="fichas.html">Sí</a>
-                <a id="noButton" class="btn-neon" href="#">No, Crear Ficha</a><br>
-                <div class="img-container"><img src="https://www.abedulfarma.com/wp-content/uploads/dermatologia.jpg" height="200" alt="Dermatología Image"></div>
+                <a id="siButton" class="btn-neon" href="Especialidades.php?especialidad=<?php echo $especialidad ;?>">Sí</a>
+                <a id="noButton" class="btn-neon" href="crear.php?especialidad=<?php echo $especialidad ;?>&medico=nulo">No, Crear Ficha</a><br>
+                <div class="img-container"><img src="./images/dermatologia_2.jpg" height="200" alt="Dermatología Image"></div>
                 <p>¿Qué es un Médico de Cabecera?</p>
                 <p>Un médico de cabecera es responsable de la atención general del paciente en un hospital o en el ámbito clínico.</p>
             </div>
         </div>
       </div>
    </div>
+   <script>
+    setTimeout(function () {
+        console.log("Han pasado 30 segundos");
+        window.location.href = 'index.html';
+    }, 10000);
+   </script>
+   
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"

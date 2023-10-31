@@ -74,6 +74,7 @@
         console.log("Han pasado 2 segundos");
         socket.send("pantalla");
     }, 2000);
+    
     datos = [];
 
     socket.onmessage = function (event) {

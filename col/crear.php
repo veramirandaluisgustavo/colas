@@ -6,7 +6,21 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <title>Title</title>
 </head>
+
+
 <body>
+
+<?php
+    $medico=$_GET["medico"];
+    $especialidad=$_GET["especialidad"];
+    echo '<script>
+    let medico="'.$medico.'";
+    let especialidad="'.$especialidad.'";
+    </script>'
+    
+?>
+
+
 <div class="container mt-5">
     <div class="card">
         <div class="card-body">
@@ -25,14 +39,20 @@
 </div>
 
 <script th:inline="javascript">
+    setTimeout(function () {
+        console.log("Han pasado 30 segundos");
+        window.location.href = 'index.html';
+    }, 60000);
     let socket = new WebSocket("ws://localhost:8080/chat")
     function sendMessage(){
     let paciente =document.getElementById("paciente-nombre").value;
     let ci = document.getElementById("ci");
-    let medico;
-    let fullMessage ="paciente-nombre:" +username+"-ci:"+ ci.value+"-medico:"+medico;
+    
+    let fullMessage ="paciente-nombre:" +paciente+"-ci:"+ ci.value+"-medico:"+medico+"-especialidad:"+especialidad;
+    console.log(fullMessage);
     socket.send(fullMessage);
-    messageInput.value="";
+    window.location.href = 'index.html';
+    
     }
 </script>
 
