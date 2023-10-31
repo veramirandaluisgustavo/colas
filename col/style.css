@@ -1,0 +1,27 @@
+.modal-container{
+    display: none;
+    color: aliceblue;
+    background-color: rgba(0, 0, 0,0.4);
+    height: 100vh;
+    width: 100vw;
+    align-items: center;
+    justify-content: center;
+    
+    position: fixed;
+    
+    
+    top: 0;
+    left: 0;
+
+
+}
+.show{
+    display: flex;
+}
+.modal2{
+    padding: 30px 50px;
+    background-color: blue;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+    text-align: center;
+}
