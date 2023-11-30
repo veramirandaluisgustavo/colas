@@ -71,8 +71,8 @@
         modal_cont.classList.add('show');
         setTimeout(function () {
         console.log("Han pasado 10 segundos");
-        //window.location.href = 'index.html';
-    }, 10000);
+        window.location.href = 'index.html';
+    }, 5000);
 
     };
 </script>
