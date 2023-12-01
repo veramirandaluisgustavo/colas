@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-ControllerApplication<CONTROLLER>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.SERVER_CONTROLLER.CONTROLLER.ControllerApplication",
+            "projectName": "CONTROLLER",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

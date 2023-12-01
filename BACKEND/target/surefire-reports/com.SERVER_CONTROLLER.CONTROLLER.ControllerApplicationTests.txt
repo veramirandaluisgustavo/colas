@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.SERVER_CONTROLLER.CONTROLLER.ControllerApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.664 s - in com.SERVER_CONTROLLER.CONTROLLER.ControllerApplicationTests
